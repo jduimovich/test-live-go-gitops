@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-live-go
+  namespace: openshift-gitops 
+  finalizers: ["resources-finalizer.argocd.argoproj.io"] 
+spec:
+  project: default
+  source:
+    path: ./components/test-live-go/overlays/development
+    repoURL: https://github.com/jduimovich/test-live-go-gitops
+    targetRevision: main
+  destination:
+    namespace: test-live-go
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

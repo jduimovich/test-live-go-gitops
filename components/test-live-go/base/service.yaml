@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    app.kubernetes.io/instance: test-live-go
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test-live-go 
+  name: test-live-go
+  namespace: test-live-go
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/instance: test-live-go 
